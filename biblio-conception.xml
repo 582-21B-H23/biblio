@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
-<!-- Active URL: http://localhost:8080/sql/ -->
 <sql>
 <datatypes db="mysql">
 	<group label="Numeric" color="rgb(238,238,170)">
@@ -37,64 +36,63 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="45" y="140" name="auteur">
-<row name="id" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
+</datatypes><table x="16" y="109" name="livre">
+<row name="liv_id" null="0" autoincrement="1">
+<datatype>INT</datatype>
 </row>
-<row name="nom" null="0" autoincrement="0">
-<datatype>VARCHAR(25)</datatype>
+<row name="liv_titre" null="0" autoincrement="0">
+<datatype>VARCHAR(500)</datatype>
 </row>
-<row name="prenom" null="0" autoincrement="0">
-<datatype>VARCHAR(25)</datatype>
-</row>
-<row name="ddn" null="0" autoincrement="0">
-<datatype>DATE</datatype>
-</row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="537" y="162" name="livre">
-<row name="id" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="titre" null="0" autoincrement="0">
-<datatype>VARCHAR(100)</datatype>
-</row>
-<row name="annee" null="0" autoincrement="0">
-<datatype>YEAR</datatype>
-</row>
-<row name="editeur" null="0" autoincrement="0">
-<datatype>VARCHAR(50)</datatype>
-</row>
-<row name="ibnn13" null="0" autoincrement="0">
+<row name="liv_isbn13" null="0" autoincrement="0">
 <datatype>CHAR(13)</datatype>
 </row>
+<row name="liv_annee" null="1" autoincrement="0">
+<datatype>YEAR</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>id</part>
+<part>liv_id</part>
 </key>
 <key type="UNIQUE" name="">
-<part>ibnn13</part>
+<part>liv_isbn13</part>
 </key>
 </table>
-<table x="293" y="177" name="auteur_livre">
-<row name="id" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
+<table x="488" y="109" name="auteur">
+<row name="aut_id" null="0" autoincrement="1">
+<datatype>SMALLINT</datatype>
 </row>
-<row name="id_auteur" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="auteur" row="id" />
+<row name="aut_prenom" null="1" autoincrement="0">
+<datatype>VARCHAR(50)</datatype>
+<default>NULL</default></row>
+<row name="aut_nom" null="1" autoincrement="0">
+<datatype>VARCHAR(50)</datatype>
+<default>NULL</default></row>
+<row name="aut_ddn" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>aut_id</part>
+</key>
+</table>
+<table x="246" y="119" name="rel_livre_auteur">
+<row name="rla_id" null="0" autoincrement="1">
+<datatype>INT</datatype>
 </row>
-<row name="id_livre" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="livre" row="id" />
+<row name="rla_liv_id_ce" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="livre" row="liv_id" />
+</row>
+<row name="rla_aut_id_ce" null="0" autoincrement="0">
+<datatype>SMALLINT</datatype>
+<relation table="auteur" row="aut_id" />
 </row>
 <key type="PRIMARY" name="">
-<part>id</part>
+<part>rla_id</part>
 </key>
-<key type="UNIQUE" name="">
-<part>id_auteur</part>
-<part>id_livre</part>
+<key type="INDEX" name="">
+<part>rla_liv_id_ce</part>
+</key>
+<key type="INDEX" name="">
+<part>rla_aut_id_ce</part>
 </key>
 </table>
 </sql>
